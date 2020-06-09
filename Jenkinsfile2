@@ -22,9 +22,10 @@ pipeline {
 			agent any
             steps {
               withSonarQubeEnv('sonarqube') {
-                sh 'mvn sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.junit.reportPaths=${workdir}/jenkins/${env.JOB_NAME}/target/surefire-reports -Dsonar.java.binaries=. '
+                sh 'mvn sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.junit.reportPaths=${WORKSPACE}/target/surefire-reports -Dsonar.java.binaries=. '
 		sh 'pwd'
 		sh 'cd ${workdir} && pwd'
+		sh 'cd ${WORKSPACE} && pwd'
               }
             }
 		} 
