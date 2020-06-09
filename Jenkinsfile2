@@ -24,7 +24,7 @@ pipeline {
               withSonarQubeEnv('sonarqube') {
                 sh 'mvn sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.java.binaries=. '
 		sh 'pwd'
-		sh 'cd workdir && pwd'
+		sh 'cd ${workdir} && pwd'
               }
             }
 		} 
