@@ -17,6 +17,14 @@ pipeline {
             sh "mvn clean install -Dmaven.test.failure.ignore=true"
          }
       }
+      stage('SonarQube analysis'){
+			agent any
+            steps {
+              withSonarQubeEnv('sonarqube') {
+                sh 'mvn sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.java.binaries=. '
+              }
+            }
+		} 
    }
     post{
         always{
