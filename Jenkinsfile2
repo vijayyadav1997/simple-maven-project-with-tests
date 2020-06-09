@@ -1,0 +1,26 @@
+pipeline {
+   agent any
+
+   tools {
+      maven "maven"
+   }
+
+  stages {
+//       stage('test'){
+//          steps{
+    //        git 'https://github.com/vijayyadav1997/sample-java-jenkins.git'
+//            sh "mvn  test"
+//          } -Dmaven.test.failure.ignore=true
+//      }
+      stage('Build') {
+         steps {
+            sh "mvn clean install"
+         }
+      }
+   }
+    post{
+        always{
+    junit(allowEmptyResults: true, testResults: '/target/surefire-reports/*.xml')
+    }
+    }
+}
