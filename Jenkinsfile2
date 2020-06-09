@@ -1,4 +1,7 @@
 pipeline {
+environment {
+	 space="/data/jenkinshome/jenkins/workspace/test-pipeline"
+	 }
    agent any
 
    tools {
@@ -22,7 +25,7 @@ pipeline {
 			agent any
             steps {
               withSonarQubeEnv('sonarqube') {
-                sh 'mvn sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.junit.reportPaths=${WORKSPACE}/target/surefire-reports -Dsonar.java.binaries=. '
+                sh 'mvn sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.junit.reportPaths=${space}/target/surefire-reports -Dsonar.java.binaries=. '
 		sh 'pwd'
 		sh 'cd ${workdir} && pwd'
 		sh 'cd ${WORKSPACE} && pwd'
